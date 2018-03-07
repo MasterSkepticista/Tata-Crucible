@@ -1,10 +1,9 @@
 clc, clear;
 url = 'http://192.168.43.1:8080/shot.jpg';
-while true,
 %% Clear environment vars
 % Image Pre-processing and plane trisection
-
-
+while true;
+    
 image  = imread(url);
 
 fudgeFactor = 0.9;
@@ -39,12 +38,12 @@ BWsdilb = imdilate(BWs, [se90 se0]);
 
 c=BWsdilr+BWsdilg+BWsdilb;
 c=~c;
-detectCircles = @(x) imfindcircles(x,[20 35],'Sensitivity',0.89, 'EdgeThreshold',0.0, 'Method','PhaseCode', 'ObjectPolarity','Dark');
+detectCircles = @(x) imfindcircles(x,[20 50],'Sensitivity',0.89, 'EdgeThreshold',0.0, 'Method','PhaseCode', 'ObjectPolarity','Dark');
 [centers, radii, metric] = detectCircles(c);
 
 %% Mark circles on the image
-%imshow(c);
-%viscircles(centers, radii);
-%pause(2);
+% imshow(c);
+% viscircles(centers, radii);
+% pause(2);
 disp(size(centers,1));
-end
+end;
